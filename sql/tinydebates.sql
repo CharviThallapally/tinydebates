@@ -1,0 +1,19 @@
+CREATE DATABASE IF NOT EXISTS tinydebates;
+USE tinydebates;
+
+CREATE TABLE debates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question VARCHAR(255) NOT NULL,
+    option1 VARCHAR(100) NOT NULL,
+    option2 VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE votes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    debate_id INT NOT NULL,
+    vote_option TINYINT NOT NULL, -- 1 or 2
+    argument VARCHAR(140),
+    voted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (debate_id) REFERENCES debates(id) ON DELETE CASCADE
+);
